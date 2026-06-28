@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rotting Archive — Underground Overseas Sourcing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Share+Tech+Mono:wght@400&display=swap" rel="stylesheet"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Share Tech Mono',monospace;background:#0a0a0a;color:#c8c8c8;min-height:100vh;}
+
+    /* HEADER */
+    .ra-header{background:#0d0d0d;border-bottom:2px solid #3a0000;position:sticky;top:0;z-index:100;}
+    .ra-logo-wrap{padding:16px 24px 10px;display:flex;align-items:center;justify-content:space-between;}
+    .ra-logo{font-family:'Metal Mania',cursive;font-size:28px;color:#8b0000;letter-spacing:3px;}
+    .ra-logo-sub{font-size:8px;letter-spacing:3px;color:#440000;text-transform:uppercase;margin-top:2px;}
+    .ra-nav{display:flex;border-top:1px solid #2a0000;}
+    .ra-nav a{flex:1;text-align:center;padding:9px 4px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#666;border-right:1px solid #2a0000;text-decoration:none;font-family:'Share Tech Mono',monospace;}
+    .ra-nav a:hover{background:#1a0000;color:#cc0000;}
+    .ra-nav a:last-child{border-right:none;}
+
+    /* TICKER */
+    .ra-ticker{background:#0d0000;border-bottom:1px solid #2a0000;padding:5px 0;overflow:hidden;white-space:nowrap;}
+    .ra-ticker-inner{display:inline-block;animation:tick 24s linear infinite;font-size:9px;letter-spacing:2px;color:#660000;}
+    @keyframes tick{0%{transform:translateX(100vw);}100%{transform:translateX(-100%);}  }
+
+    /* HERO */
+    .ra-gore{position:relative;background:#050505;border-bottom:2px solid #3a0000;overflow:hidden;min-height:220px;display:flex;align-items:center;justify-content:center;}
+    .ra-gore-grid{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,#0f0000 0px,#0f0000 1px,transparent 1px,transparent 30px),repeating-linear-gradient(90deg,#0f0000 0px,#0f0000 1px,transparent 1px,transparent 30px);opacity:0.5;}
+    .ra-gore-symbols{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-around;font-size:70px;opacity:0.07;color:#8b0000;user-select:none;pointer-events:none;}
+    .ra-gore-content{position:relative;z-index:2;text-align:center;padding:2.5rem 1rem;}
+    .ra-gore-title{font-family:'Metal Mania',cursive;font-size:36px;color:#8b0000;letter-spacing:6px;line-height:1.2;}
+    .ra-gore-deco{font-size:18px;color:#440000;letter-spacing:14px;margin:10px 0;}
+    .ra-gore-line{width:60px;height:1px;background:#3a0000;margin:10px auto;}
+    .ra-gore-sub{font-size:9px;letter-spacing:4px;color:#440000;text-transform:uppercase;}
+
+    /* COUNTDOWN */
+    .ra-countdown{background:#0d0000;border-bottom:2px solid #3a0000;padding:16px 24px;text-align:center;}
+    .ra-cd-label{font-size:9px;letter-spacing:4px;color:#660000;text-transform:uppercase;margin-bottom:12px;}
+    .ra-cd-boxes{display:flex;justify-content:center;gap:10px;}
+    .ra-cd-box{background:#050505;border:1px solid #3a0000;padding:10px 14px;min-width:60px;}
+    .ra-cd-num{font-family:'Metal Mania',cursive;font-size:30px;color:#8b0000;line-height:1;}
+    .ra-cd-unit{font-size:8px;letter-spacing:2px;color:#440000;text-transform:uppercase;margin-top:4px;}
+
+    /* NOTICE */
+    .ra-notice{margin:16px 24px;background:#0d0000;border:1px solid #3a0000;padding:10px 16px;font-size:10px;letter-spacing:2px;color:#666;text-align:center;}
+
+    /* SHOP */
+    .ra-section{padding:0 24px 24px;max-width:1000px;margin:0 auto;}
+    .ra-section-title{font-size:9px;letter-spacing:4px;color:#660000;text-transform:uppercase;border-bottom:1px solid #2a0000;padding-bottom:8px;margin-bottom:16px;margin-top:24px;}
+    .ra-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+    .ra-card{background:#0d0d0d;border:1px solid #2a0000;cursor:pointer;transition:border-color 0.15s,transform 0.15s;}
+    .ra-card:hover{border-color:#8b0000;transform:translateY(-2px);}
+    .ra-card-img{width:100%;aspect-ratio:1;background:#111;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #2a0000;position:relative;overflow:hidden;flex-direction:column;gap:6px;}
+    .ra-card-img::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.15) 3px,rgba(0,0,0,0.15) 4px);pointer-events:none;}
+    .ra-card-img-emoji{font-size:52px;position:relative;z-index:1;}
+    .ra-card-img-label{font-size:8px;letter-spacing:2px;color:#440000;text-transform:uppercase;position:relative;z-index:1;}
+    .ra-featured{border:1px solid #660000;}
+    .ra-featured-badge{background:#1a0000;border-bottom:1px solid #660000;padding:5px 12px;font-size:8px;letter-spacing:3px;color:#880000;text-transform:uppercase;text-align:center;}
+    .ra-card-body{padding:12px;}
+    .ra-card-tag{font-size:8px;letter-spacing:2px;color:#660000;text-transform:uppercase;margin-bottom:4px;}
+    .ra-card-name{font-size:12px;color:#aaa;margin-bottom:6px;line-height:1.5;}
+    .ra-card-price{font-size:16px;color:#cc0000;font-weight:700;}
+    .ra-card-meta{font-size:9px;color:#444;margin-top:4px;}
+    .ra-card-size{font-size:9px;color:#555;margin-top:3px;}
+    .ra-order-btn{display:block;width:100%;margin-top:10px;padding:8px;text-align:center;border:1px solid #3a0000;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#880000;background:#0d0000;cursor:pointer;text-decoration:none;}
+    .ra-order-btn:hover{background:#1a0000;color:#cc0000;}
+
+    /* COP CONFIRMATIONS */
+    .ra-cops{padding:0 24px 24px;max-width:1000px;margin:0 auto;}
+    .ra-cops-title{font-size:9px;letter-spacing:4px;color:#660000;text-transform:uppercase;border-bottom:1px solid #2a0000;padding-bottom:8px;margin-bottom:16px;margin-top:8px;}
+    .ra-cop{background:#0d0000;border:1px solid #2a0000;padding:14px 16px;margin-bottom:10px;}
+    .ra-cop-header{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+    .ra-cop-avatar{width:32px;height:32px;border:1px solid #3a0000;display:flex;align-items:center;justify-content:center;font-size:11px;color:#660000;background:#050505;border-radius:50%;flex-shrink:0;}
+    .ra-cop-name{font-size:11px;color:#888;}
+    .ra-cop-item{font-size:9px;color:#550000;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+    .ra-cop-text{font-size:10px;color:#666;line-height:1.7;}
+    .ra-cop-stars{font-size:12px;color:#660000;margin-top:6px;letter-spacing:4px;}
+
+    /* HOW IT WORKS */
+    .ra-how{margin:0 24px 24px;background:#0d0000;border:1px solid #2a0000;max-width:1000px;}
+    .ra-how-title{font-size:9px;letter-spacing:3px;color:#660000;text-transform:uppercase;padding:12px 16px;border-bottom:1px solid #2a0000;}
+    .ra-steps{padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
+    .ra-step{display:flex;gap:12px;font-size:11px;color:#666;line-height:1.7;align-items:flex-start;}
+    .ra-step-n{min-width:20px;height:20px;border:1px solid #3a0000;display:flex;align-items:center;justify-content:center;font-size:9px;color:#660000;flex-shrink:0;margin-top:2px;}
+
+    /* FAQ */
+    .ra-faq{margin:0 24px 24px;max-width:1000px;}
+    .ra-faq-title{font-size:9px;letter-spacing:4px;color:#660000;text-transform:uppercase;border-bottom:1px solid #2a0000;padding-bottom:8px;margin-bottom:16px;}
+    .ra-faq-item{border:1px solid #2a0000;margin-bottom:8px;background:#0d0000;}
+    .ra-faq-q{padding:12px 16px;font-size:10px;color:#888;cursor:pointer;letter-spacing:1px;display:flex;justify-content:space-between;align-items:center;}
+    .ra-faq-q:hover{color:#cc0000;}
+    .ra-faq-a{padding:0 16px 12px;font-size:10px;color:#555;line-height:1.7;display:none;}
+    .ra-faq-item.open .ra-faq-a{display:block;}
+    .ra-faq-item.open .ra-faq-q{color:#cc0000;}
+
+    /* DM BUTTON */
+    .ra-dm-wrap{padding:0 24px 8px;max-width:1000px;margin:0 auto;}
+    .ra-dm{display:block;width:100%;padding:14px;text-align:center;border:1px solid #660000;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#cc0000;background:#0d0000;cursor:pointer;text-decoration:none;}
+    .ra-dm:hover{background:#1a0000;}
+
+    /* FOOTER */
+    .ra-footer{text-align:center;padding:20px 24px;border-top:2px solid #3a0000;font-size:9px;letter-spacing:3px;color:#440000;text-transform:uppercase;background:#050505;margin-top:16px;}
+
+    /* MODAL */
+    .ra-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;align-items:center;justify-content:center;padding:20px;}
+    .ra-modal-bg.open{display:flex;}
+    .ra-modal{background:#0d0d0d;border:1px solid #660000;max-width:420px;width:100%;padding:24px;}
+    .ra-modal-title{font-family:'Metal Mania',cursive;font-size:20px;color:#8b0000;margin-bottom:4px;}
+    .ra-modal-sub{font-size:9px;letter-spacing:2px;color:#440000;margin-bottom:16px;text-transform:uppercase;}
+    .ra-modal-item{font-size:11px;color:#888;margin-bottom:16px;padding:10px;background:#050505;border:1px solid #2a0000;}
+    .ra-modal label{display:block;font-size:9px;letter-spacing:2px;color:#660000;text-transform:uppercase;margin-bottom:4px;margin-top:12px;}
+    .ra-modal select,.ra-modal input{width:100%;background:#050505;border:1px solid #2a0000;color:#aaa;font-family:'Share Tech Mono',monospace;font-size:11px;padding:8px 10px;outline:none;}
+    .ra-modal select:focus,.ra-modal input:focus{border-color:#660000;}
+    .ra-modal-steps{margin:16px 0;padding:12px;background:#050505;border:1px solid #1a0000;font-size:10px;color:#555;line-height:1.8;}
+    .ra-modal-close{display:block;width:100%;margin-top:16px;padding:10px;text-align:center;border:1px solid #3a0000;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;background:transparent;cursor:pointer;}
+    .ra-modal-close:hover{color:#cc0000;border-color:#660000;}
+    .ra-modal-confirm{display:block;width:100%;margin-top:8px;padding:10px;text-align:center;border:1px solid #660000;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#cc0000;background:#0d0000;cursor:pointer;text-decoration:none;}
+    .ra-modal-confirm:hover{background:#1a0000;}
+
+    @media(max-width:600px){
+      .ra-logo{font-size:22px;}
+      .ra-gore-title{font-size:26px;}
+      .ra-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));}
+      .ra-section,.ra-cops,.ra-how,.ra-faq,.ra-dm-wrap{padding-left:16px;padding-right:16px;}
+      .ra-how{margin-left:16px;margin-right:16px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="ra-header">
+  <div class="ra-logo-wrap">
+    <div>
+      <div class="ra-logo">⛧ ROTTING ARCHIVE ⛧</div>
+      <div class="ra-logo-sub">
+        <span style="display:inline-block;transform:rotate(180deg);">✝</span>
+        underground overseas sourcing
+        <span style="display:inline-block;transform:rotate(180deg);">✝</span>
+      </div>
+    </div>
+  </div>
+  <nav class="ra-nav">
+    <a href="#shop">⛧ shop</a>
+    <a href="#confirmations">cops</a>
+    <a href="#how">how it works</a>
+    <a href="#faq">faq</a>
+  </nav>
+</header>
+
+<!-- TICKER -->
+<div class="ra-ticker">
+  <span class="ra-ticker-inner">⛧ PRE-ORDER ONLY <span style="display:inline-block;transform:rotate(180deg);">✝</span> ALL SIZES AVAILABLE <span style="display:inline-block;transform:rotate(180deg);">✝</span> SHIPS DIRECT FROM OVERSEAS <span style="display:inline-block;transform:rotate(180deg);">✝</span> 2–3 WEEK DELIVERY <span style="display:inline-block;transform:rotate(180deg);">✝</span> CASH APP / APPLE PAY ONLY <span style="display:inline-block;transform:rotate(180deg);">✝</span> DM TO COP ⛧ PRE-ORDER ONLY <span style="display:inline-block;transform:rotate(180deg);">✝</span> ALL SIZES AVAILABLE <span style="display:inline-block;transform:rotate(180deg);">✝</span> SHIPS OVERSEAS <span style="display:inline-block;transform:rotate(180deg);">✝</span> DM TO COP &nbsp;&nbsp;&nbsp;</span>
+</div>
+
+<!-- HERO -->
+<div class="ra-gore">
+  <div class="ra-gore-grid"></div>
+  <div class="ra-gore-symbols">
+    <span>⛧</span>
+    <span style="display:inline-block;transform:rotate(180deg);">✝</span>
+    <span>☠</span>
+    <span style="display:inline-block;transform:rotate(180deg);">✝</span>
+    <span>⛧</span>
+  </div>
+  <div class="ra-gore-content">
+    <div class="ra-gore-title">ROTTING<br>ARCHIVE</div>
+    <div class="ra-gore-deco">⛧ <span style="display:inline-block;transform:rotate(180deg);">✝</span> ⛧</div>
+    <div class="ra-gore-line"></div>
+    <div class="ra-gore-sub">overseas archive pieces — rare finds — all sizes</div>
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="ra-countdown">
+  <div class="ra-cd-label">⛧ next drop in ⛧</div>
+  <div class="ra-cd-boxes">
+    <div class="ra-cd-box"><div class="ra-cd-num" id="cd-d">00</div><div class="ra-cd-unit">days</div></div>
+    <div class="ra-cd-box"><div class="ra-cd-num" id="cd-h">00</div><div class="ra-cd-unit">hrs</div></div>
+    <div class="ra-cd-box"><div class="ra-cd-num" id="cd-m">00</div><div class="ra-cd-unit">min</div></div>
+    <div class="ra-cd-box"><div class="ra-cd-num" id="cd-s">00</div><div class="ra-cd-unit">sec</div></div>
+  </div>
+</div>
+
+<!-- NOTICE -->
+<div class="ra-notice">
+  <span style="display:inline-block;transform:rotate(180deg);">✝</span>
+  pre-order service — pay first, we source and ship direct to your door — 2 to 3 week delivery
+  <span style="display:inline-block;transform:rotate(180deg);">✝</span>
+</div>
+
+<!-- SHOP -->
+<div class="ra-section" id="shop">
+  <div class="ra-section-title">⛧ denim archive</div>
+  <div class="ra-grid">
+
+    <div class="ra-card ra-featured">
+      <div class="ra-featured-badge">⛧ featured drop ⛧</div>
+      <div class="ra-card-img">
+        <span class="ra-card-img-emoji">👖</span>
+        <div class="ra-card-img-label">patchwork</div>
+      </div>
+      <div class="ra-card-body">
+        <div class="ra-card-tag">pre-order</div>
+        <div class="ra-card-name">Rick Owens Patchwork Denim</div>
+        <div class="ra-card-size">XS — 3XL available</div>
+        <div class="ra-card-price">$125</div>
+        <div class="ra-card-meta">ships overseas · 2–3 wk delivery</div>
+        <button class="ra-order-btn" onclick="openModal('Rick Owens Patchwork Denim','$125')">
+          <span style="display:inline-block;transform:rotate(180deg);">✝</span> order this
+        </button>
+      </div>
+    </div>
+
+    <div class="ra-card">
+      <div class="ra-card-img">
+        <span class="ra-card-img-emoji">👖</span>
+        <div class="ra-card-img-label">bias bootcut</div>
+      </div>
+      <div class="ra-card-body">
+        <div class="ra-card-tag">pre-order</div>
+        <div class="ra-card-name">Rick Owens Bias Bootcut Jeans</div>
+        <div class="ra-card-size">XS — 3XL available</div>
+        <div class="ra-card-price">$110</div>
+        <div class="ra-card-meta">ships overseas · 2–3 wk delivery</div>
+        <button class="ra-order-btn" onclick="openModal('Rick Owens Bias Bootcut Jeans','$110')">
+          <span style="display:inline-block;transform:rotate(180deg);">✝</span> order this
+        </button>
+      </div>
+    </div>
+
+    <div class="ra-card ra-featured" style="border-color:#550000;">
+      <div class="ra-featured-badge" style="color:#660000;">⛧ rare find ⛧</div>
+      <div class="ra-card-img">
+        <span class="ra-card-img-emoji">👖</span>
+        <div class="ra-card-img-label">double waist</div>
+      </div>
+      <div class="ra-card-body">
+        <div class="ra-card-tag">pre-order</div>
+        <div class="ra-card-name">Intowang "Zhengtu 1941" Double Waist Denim</div>
+        <div class="ra-card-size">XS — 3XL available</div>
+        <div class="ra-card-price">$210</div>
+        <div class="ra-card-meta">ships overseas · 2–3 wk delivery</div>
+        <button class="ra-order-btn" onclick="openModal('Intowang Zhengtu 1941 Double Waist Denim','$210')">
+          <span style="display:inline-block;transform:rotate(180deg);">✝</span> order this
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- COP CONFIRMATIONS -->
+<div class="ra-cops" id="confirmations">
+  <div class="ra-cops-title">⛧ cop confirmations</div>
+  <div class="ra-cop">
+    <div class="ra-cop-header">
+      <div class="ra-cop-avatar">JX</div>
+      <div>
+        <div class="ra-cop-name">@jxvxn.wav</div>
+        <div class="ra-cop-item">rick owens patchwork denim — sz 32</div>
+      </div>
+    </div>
+    <div class="ra-cop-text">jeans are insane bro. quality way better than i expected for the price. already got 3 people asking where i got them from</div>
+    <div class="ra-cop-stars">⛧ ⛧ ⛧ ⛧ ⛧</div>
+  </div>
+  <div class="ra-cop">
+    <div class="ra-cop-header">
+      <div class="ra-cop-avatar">MK</div>
+      <div>
+        <div class="ra-cop-name">@m4lice.kr</div>
+        <div class="ra-cop-item">rick owens bias bootcut — sz 30</div>
+      </div>
+    </div>
+    <div class="ra-cop-text">fit different from anything in stores. silhouette is crazy, shipping was smooth. rotting archive is legit no cap</div>
+    <div class="ra-cop-stars">⛧ ⛧ ⛧ ⛧ ⛧</div>
+  </div>
+  <div class="ra-cop">
+    <div class="ra-cop-header">
+      <div class="ra-cop-avatar">SL</div>
+      <div>
+        <div class="ra-cop-name">@slvughter</div>
+        <div class="ra-cop-item">intowang double waist denim</div>
+      </div>
+    </div>
+    <div class="ra-cop-text">most unique jeans i own. double waist construction is crazy. shipped in 16 days, arrived perfect and well packaged</div>
+    <div class="ra-cop-stars">⛧ ⛧ ⛧ ⛧ ⛧</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="ra-how" id="how">
+  <div class="ra-how-title">
+    <span style="display:inline-block;transform:rotate(180deg);">✝</span>
+    how to order
+    <span style="display:inline-block;transform:rotate(180deg);">✝</span>
+  </div>
+  <div class="ra-steps">
+    <div class="ra-step"><div class="ra-step-n">1</div><span>Click "order this" on any item and fill out your size and info</span></div>
+    <div class="ra-step"><div class="ra-step-n">2</div><span>You'll get our Cash App or Apple Pay details — pay to lock in your order</span></div>
+    <div class="ra-step"><div class="ra-step-n">3</div><span>We source the item overseas and ship it direct to your address same day payment clears</span></div>
+    <div class="ra-step"><div class="ra-step-n">4</div><span>Tracking info sent to your email once shipped — arrives in 2 to 3 weeks</span></div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="ra-faq" id="faq">
+  <div class="ra-faq-title">⛧ faq</div>
+
+  <div class="ra-faq-item">
+    <div class="ra-faq-q" onclick="toggleFaq(this)">
+      how long does shipping really take?
+      <span class="faq-arrow">⛧</span>
+    </div>
+    <div class="ra-faq-a">Items ship direct from overseas. Realistically 14–21 days. We send you tracking once it moves so you can watch it the whole way.</div>
+  </div>
+
+  <div class="ra-faq-item">
+    <div class="ra-faq-q" onclick="toggleFaq(this)">
+      is this legit? how do i know ill get my stuff?
+      <span class="faq-arrow">⛧</span>
+    </div>
+    <div class="ra-faq-a">We send you order confirmation and tracking for every single order. Check our cop confirmations — real customers, real orders. We are not going anywhere.</div>
+  </div>
+
+  <div class="ra-faq-item">
+    <div class="ra-faq-q" onclick="toggleFaq(this)">
+      what sizes are available?
+      <span class="faq-arrow">⛧</span>
+    </div>
+    <div class="ra-faq-a">All sizes XS through 3XL are available on every item. DM us if you need measurements before ordering.</div>
+  </div>
+
+  <div class="ra-faq-item">
+    <div class="ra-faq-q" onclick="toggleFaq(this)">
+      what payment do you accept?
+      <span class="faq-arrow">⛧</span>
+    </div>
+    <div class="ra-faq-a">Cash App and Apple Pay only. No refunds once we place the order overseas — all sales are final.</div>
+  </div>
+
+  <div class="ra-faq-item">
+    <div class="ra-faq-q" onclick="toggleFaq(this)">
+      can i cancel my order?
+      <span class="faq-arrow">⛧</span>
+    </div>
+    <div class="ra-faq-a">Orders can be cancelled within 1 hour of payment. After that the item is already sourced and we cannot cancel.</div>
+  </div>
+
+</div>
+
+<!-- DM BUTTON -->
+<div class="ra-dm-wrap">
+  <a class="ra-dm" href="https://instagram.com/jealousyisdeath" target="_blank">
+    ⛧ dm us on instagram to order ⛧
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer class="ra-footer">
+  ⛧
+  <span style="display:inline-block;transform:rotate(180deg);">✝</span>
+  rotting archive © 2026 — underground sourcing — dm to cop — no restocks
+  <span style="display:inline-block;transform:rotate(180deg);">✝</span>
+  ⛧
+</footer>
+
+<!-- ORDER MODAL -->
+<div class="ra-modal-bg" id="modal">
+  <div class="ra-modal">
+    <div class="ra-modal-title">⛧ lock in your order</div>
+    <div class="ra-modal-sub">pre-order — ships overseas — 2–3 weeks</div>
+    <div class="ra-modal-item" id="modal-item-name">Item name here</div>
+
+    <label>your size</label>
+    <select id="modal-size">
+      <option>XS</option>
+      <option>S</option>
+      <option selected>M</option>
+      <option>L</option>
+      <option>XL</option>
+      <option>2XL</option>
+      <option>3XL</option>
+    </select>
+
+    <label>your instagram handle</label>
+    <input type="text" id="modal-ig" placeholder="@yourhandle"/>
+
+    <label>your email (for tracking)</label>
+    <input type="email" id="modal-email" placeholder="you@email.com"/>
+
+    <div class="ra-modal-steps">
+      <strong style="color:#660000;font-size:9px;letter-spacing:2px;">NEXT STEPS</strong><br/>
+      After submitting, DM us on Instagram to get our Cash App or Apple Pay info. Send payment to lock in your order. We place it the same day.
+    </div>
+
+    <a class="ra-modal-confirm" id="modal-dm-link" href="https://instagram.com/jealousyisdeath" target="_blank">
+      <span style="display:inline-block;transform:rotate(180deg);">✝</span>
+      submit &amp; dm us on instagram
+    </a>
+    <button class="ra-modal-close" onclick="closeModal()">cancel</button>
+  </div>
+</div>
+
+<script>
+  // COUNTDOWN — set your drop date here
+  const dropDate = new Date();
+  dropDate.setDate(dropDate.getDate() + 6);
+  dropDate.setHours(dropDate.getHours() + 14);
+
+  function tick() {
+    const now = new Date();
+    let diff = Math.max(0, dropDate - now);
+    const d = Math.floor(diff / 86400000); diff -= d * 86400000;
+    const h = Math.floor(diff / 3600000); diff -= h * 3600000;
+    const m = Math.floor(diff / 60000); diff -= m * 60000;
+    const s = Math.floor(diff / 1000);
+    document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // FAQ
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // MODAL
+  function openModal(name, price) {
+    document.getElementById('modal-item-name').textContent = name + ' — ' + price;
+    document.getElementById('modal').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+  }
+
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+</body>
+</html>
